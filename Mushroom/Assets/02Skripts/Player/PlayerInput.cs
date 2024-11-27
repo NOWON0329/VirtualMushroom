@@ -4,31 +4,20 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    private PlayerMovement playerMovement;
-    public float hMove { get => _hMove; set => _hMove = value; }
-    private float _hMove;
-    public float vMove { get => _vMove; set => _vMove = value; }
-    private float _vMove;
-
+    public float hMove; 
+    public float vMove;
     public bool jump;
     public bool land;
     public bool isRun;
-
-    private void Awake()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-    }
+    public bool isStop;
 
     private void Update()
     {
         hMove = Input.GetAxis("Horizontal");
         vMove = Input.GetAxis("Vertical");
+        isStop = hMove == 0 && vMove == 0 ? true : false;
         jump = Input.GetKeyDown(KeyCode.Space);
-        
-    }
-
-    private void FixedUpdate()
-    {
-        playerMovement.Move();
+        isRun = Input.GetKey(KeyCode.LeftShift);
     }
 }
+
