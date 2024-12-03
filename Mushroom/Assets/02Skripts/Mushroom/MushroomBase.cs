@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
+public enum POISONTYPE
+{
+    NONE, DIZZY, VOMIT, BLIND
+};
+public enum COOKTYPE
+{
+    NONE, BOIL, ROAST
+};
 public class MushroomBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public POISONTYPE poisonType;
+    public COOKTYPE cookType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void EatMushroom() { }
+    public virtual void CookMushroom() { }
 }

@@ -34,6 +34,7 @@ public class Player : BaseObject
         playerInput = GetComponent<PlayerInput>();
         rigid = GetComponent<Rigidbody>();
         _landDetector = GetComponent<LandDetector>();
+
         base.Awake();
     }
 

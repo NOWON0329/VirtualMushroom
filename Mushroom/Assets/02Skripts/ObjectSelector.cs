@@ -7,7 +7,9 @@ public class ObjectSelector : MonoBehaviour
     public float rayDistance = 10f;
 
     private Renderer previousRenderer; 
-    private Color originalColor; 
+    private Color originalColor;
+
+    public GameObject targetObject;
 
     private void Awake()
     {
@@ -23,6 +25,8 @@ public class ObjectSelector : MonoBehaviour
         {
             if (hit.collider.CompareTag("Selectable"))
             {
+                targetObject = hit.collider.gameObject;
+
                 Renderer renderer = hit.collider.GetComponent<Renderer>();
 
                 if (previousRenderer != null && previousRenderer != renderer)
@@ -46,6 +50,7 @@ public class ObjectSelector : MonoBehaviour
                 if (previousRenderer != null)
                 {
                     previousRenderer.material.color = originalColor;
+                    targetObject = null;
                     previousRenderer = null;
                 }
             }
@@ -55,6 +60,7 @@ public class ObjectSelector : MonoBehaviour
             if (previousRenderer != null)
             {
                 previousRenderer.material.color = originalColor;
+                targetObject = null;
                 previousRenderer = null;
             }
         }

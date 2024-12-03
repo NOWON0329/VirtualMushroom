@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     public bool land;
     public bool isRun;
     public bool isStop;
+    public bool leftMouseClick;
 
     private void Update()
     {
@@ -18,6 +19,7 @@ public class PlayerInput : MonoBehaviour
         isStop = hMove == 0 && vMove == 0 ? true : false;
         jump = Input.GetKeyDown(KeyCode.Space);
         isRun = Input.GetKey(KeyCode.LeftShift);
+        leftMouseClick = Input.GetMouseButtonDown(0);
     }
 }
 
