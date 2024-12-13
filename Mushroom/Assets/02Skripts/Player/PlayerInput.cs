@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     public bool isRun;
     public bool isStop;
     public bool leftMouseClick;
+    public bool rightMouseClick;
 
     private void Update()
     {
@@ -20,6 +21,7 @@ public class PlayerInput : MonoBehaviour
         jump = Input.GetKeyDown(KeyCode.Space);
         isRun = Input.GetKey(KeyCode.LeftShift);
         leftMouseClick = Input.GetMouseButtonDown(0);
+        rightMouseClick = Input.GetMouseButtonDown(1);
     }
 }
 

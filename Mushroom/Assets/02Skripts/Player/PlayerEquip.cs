@@ -31,19 +31,36 @@ public class PlayerEquip : MonoBehaviour
         {
             EquipMushroom();
         }
+        else if (player.playerInput.rightMouseClick)
+        {
+            DropMushroom();
+        }
     }
 
     public void EquipMushroom()
     {
-        if(objectSelector.targetObject != null)
+        if(objectSelector.targetObject != null && objectSelector.targetObject.GetComponent<MushroomBase>())
         {
-            GameObject mushroom = objectSelector.targetObject;
-            equipMushroom = mushroom.GetComponent<MushroomBase>();
+            DropMushroom();
+
+            equipMushroom = objectSelector.targetObject.GetComponent<MushroomBase>();
             if(equipMushroom != null)
             {
-                mushroom.transform.position = equipPos.position;
-                mushroom.transform.parent = this.transform;
+                Destroy(equipMushroom.GetComponent<Rigidbody>());
+                equipMushroom.transform.position = equipPos.position;
+                equipMushroom.transform.rotation = Quaternion.Euler(0, 0, 0);
+                equipMushroom.transform.SetParent(this.transform);
             }
+        }
+    }
+
+    public void DropMushroom()
+    {
+        if (equipMushroom != null)
+        {
+            equipMushroom.gameObject.AddComponent<Rigidbody>();
+            equipMushroom.gameObject.transform.SetParent(null);
+            equipMushroom = null;
         }
     }
 
