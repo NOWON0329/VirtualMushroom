@@ -25,6 +25,9 @@ public class Player : BaseObject
     public LandDetector landDetector { get => _landDetector; set => _landDetector = value; }
     private LandDetector _landDetector;
 
+    public PlayerEquip playerEquip { get => _playerEquip; set => _playerEquip = value; }
+    private PlayerEquip _playerEquip;
+
     public float jumpPower = 10f;
 
     protected override void Awake()
@@ -34,6 +37,7 @@ public class Player : BaseObject
         playerInput = GetComponent<PlayerInput>();
         rigid = GetComponent<Rigidbody>();
         _landDetector = GetComponent<LandDetector>();
+        playerEquip = GetComponent<PlayerEquip>();
 
         base.Awake();
     }

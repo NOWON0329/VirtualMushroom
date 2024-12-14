@@ -7,8 +7,10 @@ public class PlayerEquip : MonoBehaviour
     private Player player;
     public ObjectSelector objectSelector;
     [SerializeField] private Transform equipPos;
+    private Interaction curInteraction;
 
-    private MushroomBase equipMushroom { 
+
+    public MushroomBase equipMushroom { 
         get => _equipMushroom; 
         set
         {
@@ -16,7 +18,7 @@ public class PlayerEquip : MonoBehaviour
             isGrab = true;
         } 
     }
-    public MushroomBase _equipMushroom;
+    private MushroomBase _equipMushroom;
 
     public bool isGrab = false;
 
@@ -35,6 +37,11 @@ public class PlayerEquip : MonoBehaviour
         {
             DropMushroom();
         }
+
+        if(player.playerInput.ePress)
+        {
+            SetCurInteraction();
+        }
     }
 
     public void EquipMushroom()
@@ -44,12 +51,20 @@ public class PlayerEquip : MonoBehaviour
             DropMushroom();
 
             equipMushroom = objectSelector.targetObject.GetComponent<MushroomBase>();
-            if(equipMushroom != null)
+
+            if (equipMushroom.canPick)
             {
-                Destroy(equipMushroom.GetComponent<Rigidbody>());
-                equipMushroom.transform.position = equipPos.position;
-                equipMushroom.transform.rotation = Quaternion.Euler(0, 0, 0);
-                equipMushroom.transform.SetParent(this.transform);
+                if (equipMushroom != null)
+                {
+                    Destroy(equipMushroom.GetComponent<Rigidbody>());
+                    equipMushroom.transform.position = equipPos.position;
+                    equipMushroom.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    equipMushroom.transform.SetParent(this.transform);
+                }
+            }
+            else
+            {
+                equipMushroom = null;
             }
         }
     }
@@ -64,6 +79,43 @@ public class PlayerEquip : MonoBehaviour
         }
     }
 
+    public void SetCurInteraction()
+    {
+        if (objectSelector.targetObject != null && objectSelector.targetObject.GetComponent<Interaction>())
+        {
+            if (objectSelector.targetObject.GetComponent<DishInteraction>())
+            {
+                EatMushroom();
+                return;
+            }
+            if (equipMushroom == null)
+                return;
+            if (equipMushroom.cooked)
+                return;
+
+            curInteraction = objectSelector.targetObject.GetComponent<Interaction>();
+            if (curInteraction.isInteracting)
+            {
+                curInteraction = null;
+                return;
+            }
+
+            if (curInteraction != null)
+            {
+                Destroy(equipMushroom.GetComponent<Rigidbody>());
+                equipMushroom.gameObject.transform.SetParent(null);
+                equipMushroom.transform.position = curInteraction.cookPos.position;
+                equipMushroom.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                CookMushroom();
+                isGrab = false;
+                equipMushroom = null;
+                curInteraction = null;
+                return;
+            }
+        }
+    }
+
     public void EatMushroom()
     {
         isGrab = false;
@@ -72,7 +124,6 @@ public class PlayerEquip : MonoBehaviour
 
     public void CookMushroom()
     {
-        isGrab = false;
-        equipMushroom.CookMushroom();
+        curInteraction.Interact(equipMushroom.gameObject);
     }
 }
