@@ -27,11 +27,14 @@ public class ObjectSelector : MonoBehaviour
             {
                 targetObject = hit.collider.gameObject;
 
+                int num;
                 Renderer renderer = hit.collider.GetComponent<Renderer>();
+                string mushName = hit.collider.name;
 
                 if (previousRenderer != null && previousRenderer != renderer)
                 {
                     previousRenderer.material.color = originalColor;
+                    MushroomManager.instance.HideImage();
                     previousRenderer = null;
                 }
 
@@ -40,6 +43,8 @@ public class ObjectSelector : MonoBehaviour
                     if (previousRenderer != renderer)
                     {
                         originalColor = renderer.material.color;
+                        if(int.TryParse(mushName, out num))
+                            MushroomManager.instance.ShowImage(int.Parse(mushName));                       
                         renderer.material.color = Color.red;
                         previousRenderer = renderer;
                     }
@@ -50,6 +55,7 @@ public class ObjectSelector : MonoBehaviour
                 if (previousRenderer != null)
                 {
                     previousRenderer.material.color = originalColor;
+                    MushroomManager.instance.HideImage();
                     targetObject = null;
                     previousRenderer = null;
                 }
@@ -60,8 +66,8 @@ public class ObjectSelector : MonoBehaviour
             if (previousRenderer != null)
             {
                 previousRenderer.material.color = originalColor;
+                MushroomManager.instance.HideImage();
                 targetObject = null;
-                previousRenderer = null;
             }
         }
     }

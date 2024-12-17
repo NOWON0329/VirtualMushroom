@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum POISONTYPE
 {
-    NONE, DIZZY, VOMIT
+    NONE, DIZZY, VOMIT, DIE
 };
 public class MushroomBase : MonoBehaviour
 {
@@ -14,16 +14,18 @@ public class MushroomBase : MonoBehaviour
     public bool canPick = true;
 
     public POISONTYPE poisonType;
+    public Sprite sprite;
 
     public void EatMushroom()
     {
         if (!cooked && poisonType != POISONTYPE.NONE)
         {
             GetEffectByPoisonType();
+            Destroy(this.gameObject);
             return;
         }
 
-        player.curHunger += 50;
+        player.curHunger += 30;
 
         Destroy(this.gameObject);
     }
@@ -39,6 +41,9 @@ public class MushroomBase : MonoBehaviour
                 break;
             case POISONTYPE.VOMIT:
                 player.curHunger -= 30;
+                break;
+            case POISONTYPE.DIE:
+                player.curHunger -= 100;
                 break;
         }
     }

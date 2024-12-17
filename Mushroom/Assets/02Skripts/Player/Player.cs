@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public enum PlayerState
 {
     Idle, Walk, Run, Jump, Land
@@ -42,14 +43,26 @@ public class Player : BaseObject
             if (value > 100)
                 _curHunger = 100;
             else if (value < 0)
+            {
+                _curHunger = value;
                 GameOver();
+            }
             else
                 _curHunger = value;
+
+            UpdateHungerBar();
         }
     }
     private float _curHunger;
 
     private float curTime;
+
+    public Image hungerBar;
+
+    private FadeInAndOut fadeInAndOut;
+    public Image fadeImage;
+
+    public bool die;
 
     protected override void Awake()
     {
@@ -60,6 +73,7 @@ public class Player : BaseObject
         _landDetector = GetComponent<LandDetector>();
         playerEquip = GetComponent<PlayerEquip>();
         _cameraRotation = transform.GetChild(0).GetComponent<CameraRotation>();
+        fadeInAndOut = GetComponent<FadeInAndOut>();
 
         base.Awake();
         curHunger = hunger;
@@ -80,6 +94,8 @@ public class Player : BaseObject
 
     public override void Updated()
     {
+        if (die)
+            return;
         stateMachine.Execute();
 
         if (curTime > 1)
@@ -104,6 +120,15 @@ public class Player : BaseObject
 
     private void GameOver()
     {
+        die = true;
         Debug.Log("게임 종료");
+        fadeImage.gameObject.SetActive(true);
+        fadeInAndOut.DoFadeOut(fadeImage, 2f);
+    }
+
+    private void UpdateHungerBar()
+    {
+        float ratio = (float)curHunger / (float)hunger;
+        hungerBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
     }
 }

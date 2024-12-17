@@ -119,11 +119,13 @@ public class PlayerEquip : MonoBehaviour
     public void EatMushroom()
     {
         isGrab = false;
-        equipMushroom.EatMushroom();
+        if(equipMushroom != null)
+            equipMushroom.EatMushroom();
     }
 
     public void CookMushroom()
     {
-        curInteraction.Interact(equipMushroom.gameObject);
+        if(curInteraction != null)
+            curInteraction.Interact(equipMushroom.gameObject);
     }
 }
