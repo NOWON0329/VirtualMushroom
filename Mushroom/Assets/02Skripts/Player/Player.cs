@@ -28,7 +28,28 @@ public class Player : BaseObject
     public PlayerEquip playerEquip { get => _playerEquip; set => _playerEquip = value; }
     private PlayerEquip _playerEquip;
 
+    public CameraRotation cameraRotation { get => _cameraRotation; set => _cameraRotation = value; }
+    private CameraRotation _cameraRotation;
+
     public float jumpPower = 10f;
+
+    public float hunger;
+    public float curHunger 
+    {
+        get=> _curHunger;
+        set
+        {
+            if (value > 100)
+                _curHunger = 100;
+            else if (value < 0)
+                GameOver();
+            else
+                _curHunger = value;
+        }
+    }
+    private float _curHunger;
+
+    private float curTime;
 
     protected override void Awake()
     {
@@ -38,8 +59,10 @@ public class Player : BaseObject
         rigid = GetComponent<Rigidbody>();
         _landDetector = GetComponent<LandDetector>();
         playerEquip = GetComponent<PlayerEquip>();
+        _cameraRotation = transform.GetChild(0).GetComponent<CameraRotation>();
 
         base.Awake();
+        curHunger = hunger;
     }
 
     public override void SetUp()
@@ -58,6 +81,15 @@ public class Player : BaseObject
     public override void Updated()
     {
         stateMachine.Execute();
+
+        if (curTime > 1)
+        {
+            curHunger--;
+            curTime = 0;
+            Debug.Log(curHunger);
+        }
+        else
+            curTime += Time.deltaTime;
     }
 
     public override void FixedUpdated()
@@ -68,5 +100,10 @@ public class Player : BaseObject
     public void ChangeState(PlayerState newState)
     {
         stateMachine.ChangeState(states[(int)newState]);
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("게임 종료");
     }
 }

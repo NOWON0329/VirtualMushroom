@@ -563,7 +563,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 174462, guid: 1280e3e83e440b947bbab81096d5e82e, type: 3}
   m_PrefabInstance: {fileID: 1729870262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &343609951
+--- !u!114 &343609948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -728,10 +728,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &385737376
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -843,10 +843,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &425035896
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1129,10 +1129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &632675966
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1244,10 +1244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &648206300
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1477,6 +1477,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 500
   player: {fileID: 1724774415}
+  shakeRange: 0.3
+  duration: 5
+  isDizzy: 0
 --- !u!81 &755586896
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1958,10 +1961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &998924831
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2322,10 +2325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &1116582073
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2593,10 +2596,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774422}
   cooked: 0
   canPick: 1
   poisonType: 1
-  cookType: 1
 --- !u!64 &1326763949
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2957,10 +2960,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774422}
   cooked: 0
   canPick: 1
   poisonType: 2
-  cookType: 1
 --- !u!64 &1590397249
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3097,10 +3100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774422}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!4 &1630113867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4965364616464846589, guid: 5e287f359423fc5478a3ed90107f5603, type: 3}
@@ -3331,10 +3334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &1668731193
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3786,6 +3789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 10
+  hunger: 100
 --- !u!114 &1724774423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3898,7 +3902,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 174462, guid: 1280e3e83e440b947bbab81096d5e82e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 343609951}
+      addedObject: {fileID: 343609948}
   m_SourcePrefab: {fileID: 100100000, guid: 1280e3e83e440b947bbab81096d5e82e, type: 3}
 --- !u!1 &1811362960
 GameObject:
@@ -3980,7 +3984,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 144816, guid: 3385ad9015b4e5e4682a440b5c47c70e, type: 3}
   m_PrefabInstance: {fileID: 2100406643}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1871451515
+--- !u!114 &1871451512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3989,7 +3993,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1871451510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c5a1df0a3410a048a735c95e27a622a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d6b33bfc80c47547a7bc563d8feb05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isInteracting: 0
@@ -4635,10 +4639,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774422}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!4 &1999196870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4965364616464846589, guid: 5e287f359423fc5478a3ed90107f5603, type: 3}
@@ -4728,10 +4732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7ac5affa644c7429d54b5486fab23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1724774414}
   cooked: 0
   canPick: 1
   poisonType: 0
-  cookType: 0
 --- !u!64 &2003086604
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4946,7 +4950,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 144816, guid: 3385ad9015b4e5e4682a440b5c47c70e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1871451515}
+      addedObject: {fileID: 1871451512}
   m_SourcePrefab: {fileID: 100100000, guid: 3385ad9015b4e5e4682a440b5c47c70e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
