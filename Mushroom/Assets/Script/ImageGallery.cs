@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ImageGallery : MonoBehaviour
 {
+    public Player player;
     public Sprite[] sprites;           // 스프라이트 배열 (넘길 이미지들을 여기에 할당)
     public Image displayImage;         // UI Image 컴포넌트 참조
     private int currentIndex = 0;      // 현재 표시되는 스프라이트의 인덱스
@@ -27,6 +28,12 @@ public class ImageGallery : MonoBehaviour
         {
             ShowNextImage();
         }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            displayImage.gameObject.SetActive(false);
+            player.gameStart = true;
+        }
+            
     }
 
     void ShowPreviousImage()

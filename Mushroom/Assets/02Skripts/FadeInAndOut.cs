@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class FadeInAndOut : MonoBehaviour
 {
+    public Player player;
     public void DoFadeIn(Image image, float fadeDuration)
         => StartCoroutine(FadeIn(image, fadeDuration));
 
@@ -44,5 +45,8 @@ public class FadeInAndOut : MonoBehaviour
         Color resCol = image.color;
         resCol.a = 1f;
         image.color = resCol;
+
+        yield return new WaitForSeconds(2f);
+        player.imageGallery.displayImage.gameObject.SetActive(true);
     }
 }

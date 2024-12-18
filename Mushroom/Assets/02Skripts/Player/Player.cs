@@ -59,10 +59,15 @@ public class Player : BaseObject
 
     public Image hungerBar;
 
-    private FadeInAndOut fadeInAndOut;
+    public FadeInAndOut fadeInAndOut;
     public Image fadeImage;
 
+    public ImageGallery imageGallery;
+
     public bool die;
+
+    public bool gameStart;
+    public Transform gameStartPos;
 
     protected override void Awake()
     {
@@ -77,6 +82,7 @@ public class Player : BaseObject
 
         base.Awake();
         curHunger = hunger;
+        gameStart = false;
     }
 
     public override void SetUp()
@@ -94,6 +100,8 @@ public class Player : BaseObject
 
     public override void Updated()
     {
+        if (!gameStart)
+            return;
         if (die)
             return;
         stateMachine.Execute();
